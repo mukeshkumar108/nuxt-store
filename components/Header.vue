@@ -5,7 +5,7 @@
             <nav>
                 <ul class="flex space-x-6">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Shop</a></li>
+                    <li><a href="/products">Shop</a></li>
                     <li><a href="#">About Us</a></li> 
                 </ul>
             </nav>

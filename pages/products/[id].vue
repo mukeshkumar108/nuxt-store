@@ -1,9 +1,22 @@
 <template>
     <div class="container mx-auto">
         <div v-if="product">
-            <h1 class="text-2xl font-bold mb-4">{{ product.productName }}</h1>
-            <p>{{ product.productDesc }}</p>
-            <p>£{{ product.productPrice }}/m2</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 bg-gray-100">
+                    <img
+                        src="https://www.jackeviecollections.com/collections/branston/pitsford-street.jpg"
+                        alt="Great product"
+                        class="block object-cover h-auto aspect-square"
+                        width="300"
+                        height="300"
+                    />
+                </div>
+                <div class="p-4 bg-gray-200">
+                    <h1 class="text-2xl font-bold mb-4">{{ product.productName }}</h1>
+                    <p>{{ product.productDesc }}</p>
+                    <p>£{{ product.productPrice }}/m2</p>
+                </div>
+            </div>
         </div>
         <div v-else>Loading product...</div>
     </div>
@@ -12,6 +25,7 @@
 <script setup>
 import { ref, onMounted } from '@vue/composition-api';
 import axios from 'axios';
+
 const route = useRoute();
 const config = useRuntimeConfig();
 const product = ref(null);
