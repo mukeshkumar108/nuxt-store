@@ -22,7 +22,7 @@
         <a
           class="absolute w-full h-full z-1 focus-visible:outline focus-visible:rounded-lg"
           :aria-label="title"
-          href="#"
+          href="/products"
         />
         <div :class="['flex justify-between overflow-hidden grow', { 'flex-row-reverse': reverse }]">
           <div class="flex flex-col justify-center items-start p-6 lg:p-10 max-w-1/2">
@@ -49,10 +49,10 @@ import { SfButton } from '@storefront-ui/vue';
 
 const displayDetails = [
   {
-    image: 'https://storage.googleapis.com/sfui_docs_artifacts_bucket_public/production/display.png',
-    title: 'Sunny Days Ahead',
-    subtitle: 'Be inspired',
-    description: 'Step out in style with our sunglasses collection',
+    image: 'https://artificial-living.com/cdn/shop/files/30WV-WASHEDOAK_1_1000x.png',
+    title: 'Cool Headline',
+    subtitle: 'Some subtitle',
+    description: 'A descriptive call to action',
     buttonText: 'Discover now',
     reverse: false,
     backgroundColor: 'bg-negative-200',
@@ -61,20 +61,19 @@ const displayDetails = [
     descriptionClass: 'md:typography-text-lg',
   },
   {
-    image: 'https://storage.googleapis.com/sfui_docs_artifacts_bucket_public/production/display-2.png',
-    title: 'Pack it Up',
-    subtitle: 'Be active',
-    description: 'Explore the great outdoors with our backpacks',
+    image: 'https://artificial-living.com/cdn/shop/files/30WV-WASHEDOAK_1_1000x.png',
+    title: 'Cool Headline',
+    subtitle: 'Some subtitle',
+    description: 'A descriptive call to action',
     buttonText: 'Discover now',
     reverse: true,
     backgroundColor: 'bg-warning-200',
   },
   {
-    image: 'https://storage.googleapis.com/sfui_docs_artifacts_bucket_public/production/display-3.png',
-    title: 'Fresh and Bold',
-    subtitle: 'New collection',
-    description: 'Add a pop up color to your outfit',
-    buttonText: 'Discover now',
+    image: 'https://artificial-living.com/cdn/shop/files/30WV-WASHEDOAK_1_1000x.png',
+    title: 'Cool Headline',
+    subtitle: 'Some subtitle',
+    description: 'A descriptive call to action',
     reverse: false,
     backgroundColor: 'bg-secondary-200',
   },

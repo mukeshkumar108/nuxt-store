@@ -52,7 +52,7 @@
         <p
             class="flex items-center justify-center py-2 leading-5 text-center typography-text-sm text-white/50 font-body md:ml-6"
             >
-            @2023 Vue Storefront
+            @2023 Barham & Sons
         </p>
     
     </div>
