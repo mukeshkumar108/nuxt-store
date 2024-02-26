@@ -22,11 +22,15 @@
           </SfButton>
         </div>
         <div class="p-4 border-t border-neutral-200">
-          <SfLink href="#" variant="secondary" class="no-underline">{{ product.attributes.productName }}</SfLink>
+          <h2>
+            <SfLink href="#" variant="secondary" class="no-underline">
+              {{ product.attributes.product_name }}
+            </SfLink>
+          </h2>
           <p class="block py-2 font-normal leading-5 typography-text-sm text-neutral-700">
             Lightweight • Non slip • Flexible outsole • Easy to wear on and off
           </p>
-          <span class="block pb-2 font-bold typography-text-lg">${{ product.attributes.productPrice }}</span>
+          <span class="block pb-2 headline">£{{ product.attributes.product_price }}/m2</span>
         </div>
       </NuxtLink>
     </div>

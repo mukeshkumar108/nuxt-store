@@ -12,9 +12,9 @@
                     />
                 </div>
                 <div class="p-4 bg-gray-200">
-                    <h1 class="text-2xl font-bold mb-4">{{ product.productName }}</h1>
-                    <p>{{ product.productDesc }}</p>
-                    <p>£{{ product.productPrice }}/m2</p>
+                    <h1 class="text-2xl font-bold mb-4">{{ product.product_name }}</h1>
+                    <p>{{ product.product_desc }}</p>
+                    <p>£{{ product.product_price }}/m2</p>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@ onMounted(async () => {
     try {
         const productId = route.params.id; 
         const strapiBaseUrl = config.public.STRAPI_BASE_URL;
-        const response = await axios.get(`${strapiBaseUrl}/wood-floorings/${productId}`);
+        const response = await axios.get(`${strapiBaseUrl}/vs-tests/${productId}`);
 
         console.log('Route params:', route.params); 
         console.log('Product ID:', productId);

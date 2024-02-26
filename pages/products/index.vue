@@ -2,7 +2,7 @@
   <div class="container mx-auto">
     <div class="flex">
       <aside class="w-full md:max-w-[376px]">
-        <SideFilter />
+        <Sidefilter />
       </aside>
       <div class="flex-grow"> 
         <h2 class="text-2xl font-bold mb-4">Wood Flooring</h2>
@@ -19,7 +19,8 @@
 import { ref, onMounted } from '@vue/composition-api';
 import axios from 'axios';
 import ProductCard from '~/components/ProductCard.vue';
-import SideFilter from '~/components/SideFilter.vue';
+//import SideFilter from '~/components/SideFilter.vue';
+import ProductSort from '~/components/ProductSort.vue';
 
 const productList = ref([]);
 const config = useRuntimeConfig();
@@ -27,12 +28,10 @@ const config = useRuntimeConfig();
 onMounted(async () => {
   try {
     const strapiBaseUrl = config.public.STRAPI_BASE_URL;
-
-    const response = await axios.get(`${strapiBaseUrl}/wood-floorings`); // Fetch products
-    productList.value = response.data.data; // Assuming your data is within a 'data' property. Adjust if needed.
-
+    const response = await axios.get(`${strapiBaseUrl}/vs-tests`); // fetch products
+    productList.value = response.data.data; 
   } catch (error) { 
-    console.error('Error fetching data:', error); // Log errors for debugging  
+    console.error('Error fetching data:', error); // log errors for debugging  
   }
 });
 

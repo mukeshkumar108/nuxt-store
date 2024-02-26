@@ -192,13 +192,13 @@
       details: [
         {
           id: 'c1',
-          label: 'Whites',
+          label: 'Lights',
           value: 'bg-white',
           counter: 10,
         },
         {
           id: 'c2',
-          label: 'Blacks',
+          label: 'Darks',
           value: 'bg-neutral-900',
           counter: 5,
         },

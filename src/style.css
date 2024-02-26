@@ -1,4 +1,15 @@
 /* src/style.css */
+@import 'fonts.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.body-text, p, ul, ol, dl {
+    @apply font-body;
+}
+
+.headline, h1, h2, h3, h4, h5, h6 {
+    @apply font-headline;
+    @apply font-bold;
+    @apply leading-5;
+}
