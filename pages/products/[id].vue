@@ -6,7 +6,7 @@
                     <img
                         src="https://www.jackeviecollections.com/collections/branston/pitsford-street.jpg"
                         alt="Great product"
-                        class="block object-cover h-auto aspect-square"
+                        class="block object-cover h-auto aspect-square w-full"
                         width="300"
                         height="300"
                     />

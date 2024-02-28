@@ -7,9 +7,13 @@ export default defineNuxtConfig({
     }
   },
   modules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
   ],
   css: [
     '~/src/style.css'
-  ]
+  ],
+  experimental: {
+    viewTransition: true,
+  },
 })
