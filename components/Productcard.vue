@@ -30,7 +30,7 @@
           <p class="block py-2 font-normal leading-5 typography-text-sm text-neutral-700">
             Lightweight • Non slip • Flexible outsole • Easy to wear on and off
           </p>
-          <span class="block pb-2 headline">£{{ product.attributes.product_price }}/m2</span>
+          <span class="block pb-2 headline">£{{ product.attributes.product_sell }}/m2</span>
         </div>
       </NuxtLink>
     </div>
@@ -43,5 +43,6 @@
       required: true,
     },
   });
+  console.log('Product data:', product);
   </script>
   

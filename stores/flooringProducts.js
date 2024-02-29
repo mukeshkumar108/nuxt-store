@@ -20,17 +20,27 @@ export const useFlooringProductsStore = defineStore('flooringProducts', {
                     body: JSON.stringify({
                         query: `
                             query {
-                                products {
-                                    id
-                                    product_name
-                                    product_price
+                                vsSampleProducts {
+                                    data {
+                                        id
+                                        attributes {
+                                            product_name
+                                            product_sell
+                                        }
+                                    }
                                 }
                             }
                         `,
                     })
                 });
                 const data = await response.json();
-                this.products = data.data.products;
+                console.log('GraphQL response:', data); // test to see response
+                this.products = data.data.vsSampleProducts.data.map(product => ({
+                    id: product.id,
+                    product_name: product.attributes.product_name,
+                    product_price: product.attributes.product_sell
+                }));
+                console.log('Products in store:', this.products);
             } catch (error) {
                 console.error(error);
             } finally {
