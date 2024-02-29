@@ -9,6 +9,7 @@
               class="block object-cover h-auto rounded-md aspect-square"
               width="300"
               height="300"
+              v-if="product.attributes.image"
             />
           </SfLink>
           <SfButton
@@ -37,12 +38,22 @@
   </template>
   
   <script setup>
-  defineProps({
+  import { toRefs } from 'vue';
+  import {
+    SfLink,
+    SfIconFavorite,
+    SfInput,
+    SfButton,
+  } from '@storefront-ui/vue';
+
+  const props = defineProps({
     product: {
       type: Object,
       required: true,
     },
   });
-  console.log('Product data:', product);
+
+  const { product } = toRefs(props);
+  console.log('Product data:', product.value);
   </script>
   
