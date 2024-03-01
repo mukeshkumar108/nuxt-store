@@ -16,25 +16,22 @@
 <script setup>
 import { ref, watch, computed, onMounted } from 'vue';
 import { useFlooringProductsStore } from '~/stores/flooringProducts.js';
+import { fetchGraphQLProducts } from '~/services/fetchGraphQLProducts.js';
 import Productcard from '~/components/Productcard.vue';
 
 const store = useFlooringProductsStore();
-
-onMounted(async () => {
-  await store.getProducts();
-})
-
 const products = computed(() => store.products);
+const isLoading = computed(() => store.isLoading);
 
-const renderTrigger = ref(0);
-
-watch(products, (newProducts) => {
-  if (newProducts.length > 0) {
-    products.value = products.value.slice();
+const fetch = async () => {
+  store.isLoading.value = true;
+  try {
+    const products = await fetchGraphQLProducts();
+    store.fetchGraphQLProducts(products);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    store.isLoading = false;
   }
-});
-
-console.log('Products:', products.value);
-const isLoading = store.isLoading;
-
+};
 </script>
