@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, watch, computed, onMounted } from 'vue';
 import { useFlooringProductsStore } from '~/stores/flooringProducts.js';
 import Productcard from '~/components/Productcard.vue';
 
@@ -24,7 +24,16 @@ onMounted(async () => {
   await store.getProducts();
 })
 
-const products = computed(() => store.products); 
+const products = computed(() => store.products);
+
+const renderTrigger = ref(0);
+
+watch(products, (newProducts) => {
+  if (newProducts.length > 0) {
+    products.value = products.value.slice();
+  }
+});
+
 console.log('Products:', products.value);
 const isLoading = store.isLoading;
 

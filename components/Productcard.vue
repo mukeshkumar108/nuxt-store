@@ -1,5 +1,5 @@
 <template>
-    <div class="border border-neutral-200 rounded-md hover:shadow-lg max-w-[300px]">
+    <div class="border border-neutral-200 rounded-md hover:shadow-lg max-w-[300px]" v-if="product">
       <NuxtLink :to="`/products/${product.id}`"> 
         <div class="relative">
           <SfLink href="#" class="block">
