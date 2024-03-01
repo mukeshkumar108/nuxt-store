@@ -21,9 +21,11 @@ import Productcard from '~/components/Productcard.vue';
 
 const store = useFlooringProductsStore();
 const products = computed(() => store.products);
+console.log('Products in index.vue:', products.value);
 const isLoading = computed(() => store.isLoading);
 
 const fetch = async () => {
+  console.log('Fetch hook executing...')
   store.isLoading.value = true;
   try {
     const products = await fetchGraphQLProducts();

@@ -19,7 +19,9 @@ export async function fetchGraphQLProducts() {
         });
 
         const data = await response.data;
-        return data.data.vsSampleProducts.data;
+        const products = data.data.vsSampleProducts.data;
+        console.log(products);
+        return products;
     } catch (error) {
         console.error(error);
         throw error;
