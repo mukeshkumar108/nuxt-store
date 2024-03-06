@@ -1,5 +1,6 @@
 import axios from "axios";
 import { defineStore } from "pinia";
+import { categoryMap } from "~/mappings/categoryMap";
 
 export const useProductsStore = defineStore('products', {
     state: () => ({
@@ -11,6 +12,7 @@ export const useProductsStore = defineStore('products', {
     actions: {
         async fetchProductsByCategory(category) {
             console.log('Fetching products from GraphQL API...')
+            const mappedCategory = categoryMap[category.toLowerCase()] || category;
             try {
                 const response = await axios.post('http://localhost:1337/graphql', {
                     query: `
@@ -35,7 +37,7 @@ export const useProductsStore = defineStore('products', {
                         }
                     `,
                     variables: {
-                        category
+                        category: mappedCategory
                     }
                 });
                 const data = await response.data;
