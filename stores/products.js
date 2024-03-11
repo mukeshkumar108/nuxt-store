@@ -7,11 +7,12 @@ export const useProductsStore = defineStore('products', {
         products: [],
         totalProducts: 0,
         pageSize: 12,
-        currentPage: 1
+        currentPage: 1,
     }),
     actions: {
-        async fetchProductsByCategory(category) {
-            console.log('Fetching products from GraphQL API...')
+        async fetchProductsByCategory(category, sortOrder = '') {
+            console.log('Fetching products from GraphQL API...');
+            const sortQuery = sortOrder === 'desc' ? 'product_sell:desc' : 'product_sell:asc';
             const mappedCategory = categoryMap[category.toLowerCase()] || category;
             try {
                 const response = await axios.post('http://localhost:1337/graphql', {
@@ -48,8 +49,9 @@ export const useProductsStore = defineStore('products', {
                 console.error('Error fetching products:', error);
             }
         },
-        async fetchAllProducts() {
+        async fetchAllProducts(sortOrder = '') {
             console.log('Fetching all products from GraphQL API...');
+            const sortQuery = sortOrder === 'desc' ? 'product_sell:desc' : 'product_sell:asc';
             try {
                 const response = await axios.post('http://localhost:1337/graphql', {
                     query: `
