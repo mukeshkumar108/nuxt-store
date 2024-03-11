@@ -16,7 +16,7 @@ import { useProductsStore } from '~/stores/products';
 const productsStore = useProductsStore();
 
 const { data: products, refresh } = await useAsyncData('products', () => {
-  return productsStore.fetchProductsByCategory('VIT-Wall');
+  return productsStore.fetchAllProducts();
 });
 
 const displayedProducts = computed(() => {
