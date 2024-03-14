@@ -1,25 +1,29 @@
 <template>
     <nav aria-label="Pagination">
-        <button v-if="currentPage > 1" @click="goToPage(currentPage - 1)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Previous
-        </button>
-        <button v-if="currentPage < totalPages" @click="goToPage(currentPage + 1)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Next
-        </button>
+        <ul class="pagination">
+            <li v-if="currentPage > 1" @click="changePage(currentPage - 1)" class="page-item">
+                Previous
+            </li>
+            <li v-if="currentPage < totalPages" @click="changePage(currentPage + 1)" class="page-item">
+                Previous
+            </li>
+        </ul>
     </nav>
 </template>
 
 <script setup>
+
+import { defineProps, defineEmits } from 'vue';
+
 const props = defineProps({
     currentPage: Number,
     totalPages: Number
 });
 
-const emit = defineEmits(['updatePage']);
+const emits = defineEmits(['updatePage']);
 
-function goToPage(page) {
-    productsStore.currentPage = page;
-    emit('updatePage', page);
+function changePage(page) {
+    emits('updatePage', page);
 }
 
 </script>

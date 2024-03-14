@@ -15,16 +15,16 @@ import { onMounted, computed, watch, ref } from 'vue';
 import { useAsyncData } from '#app';
 import { useProductsStore } from '~/stores/products';
 
-
-const sortOrder = ref('asc');
 const productsStore = useProductsStore();
+const sortOrder = ref('asc');
 
-watchEffect(async () => {
-  await productsStore.fetchAllProducts(sortOrder.value);
-})
+watch(sortOrder, async (newSortOrder) => {
+  await productsStore.fetchAllProducts({ sortOrder: newSortOrder });
+}, { immediate: true });
 
 const handleSortOrderChange = (newSortOrder) => {
   sortOrder.value = newSortOrder;
+  productsStore.fetchAllProducts(sortOrder.value);
 };
 
 const displayedProducts = computed(() => {
