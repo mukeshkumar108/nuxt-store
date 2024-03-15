@@ -53,11 +53,12 @@ export const useProductsStore = defineStore('products', {
         async fetchAllProducts({ sortOrder = '', page = 1 }) {
             console.log('Fetching all products from GraphQL API...');
             const sortQuery = sortOrder === 'desc' ? 'product_sell:desc' : 'product_sell:asc';
+            const start = (page - 1) * this.pageSize;
             try {
                 const response = await axios.post('http://localhost:1337/graphql', {
                     query: `
                         {
-                            vsSampleProducts(sort: "${sortQuery}", pagination: { limit: 1000 }) {
+                            vsSampleProducts(sort: "${sortQuery}", pagination: { start: ${start}, limit: ${this.pageSize} }) {
                                 data {
                                     id
                                     attributes {
@@ -80,6 +81,8 @@ export const useProductsStore = defineStore('products', {
                 const data = await response.data;
                 console.log('GraphQL fetchAll response:', response.data);
                 this.products = data.data.vsSampleProducts.data;
+                this.currentPage = data.data.vsSampleProducts.meta.pagination.page;
+                this.totalProducts = data.data.vsSampleProducts.meta.pagination.total;
                 console.log('ALL products in store:', this.products);
             } catch (error) {
                 console.error('Error fetching all products:', error);

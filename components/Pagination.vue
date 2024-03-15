@@ -1,11 +1,15 @@
 <template>
     <nav aria-label="Pagination">
         <ul class="pagination">
-            <li v-if="currentPage > 1" @click="changePage(currentPage - 1)" class="page-item">
-                Previous
+            <li v-if="currentPage > 1" class="page-item" :class="{ disabled: currentPage <= 1 }">
+                <a class="page-link" href="#" @click.prevent="goToPage(currentPage - 1)">
+                    Previous
+                </a>
             </li>
-            <li v-if="currentPage < totalPages" @click="changePage(currentPage + 1)" class="page-item">
-                Previous
+            <li v-if="currentPage < totalPages" class="page-item">
+                <a class="page-link" href="#" @click.prevent="goToPage(currentPage + 1)">
+                    Next
+                </a>
             </li>
         </ul>
     </nav>
@@ -22,7 +26,8 @@ const props = defineProps({
 
 const emits = defineEmits(['updatePage']);
 
-function changePage(page) {
+function goToPage(page) {
+    if (page < 1 || page > props.totalPages) return;
     emits('updatePage', page);
 }
 
