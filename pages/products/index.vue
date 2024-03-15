@@ -13,10 +13,12 @@
 import Productcard from '~/components/Productcard.vue';
 import ProductSort from '~/components/ProductSort.vue';
 import Pagination from '~/components/Pagination.vue';
+import { useRouter } from 'vue-router';
 import { onMounted, computed, watch, ref } from 'vue';
 import { useAsyncData } from '#app';
 import { useProductsStore } from '~/stores/products';
 
+const router = useRouter();
 const productsStore = useProductsStore();
 const sortOrder = ref('asc');
 const currentPage = ref(1);
@@ -27,6 +29,10 @@ const totalPages = computed(() =>
 const changePage = (newPage) => {
   currentPage.value = newPage;
   productsStore.fetchAllProducts({ sortOrder: sortOrder.value, page: newPage });
+  //update url for pagination
+  router.push({ path: router.currentRoute.value.path, query: { ...router.currentRoute.value.query, page: newPage } });
+  //scroll to top
+  window.scrollTo(0, 0);
 };
 
 watch([sortOrder, currentPage], async () => {
