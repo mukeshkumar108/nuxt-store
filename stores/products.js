@@ -11,15 +11,21 @@ export const useProductsStore = defineStore('products', {
         totalProducts: 0,
     }),
     actions: {
-        async fetchProductsByCategory(category, sortOrder = '') {
-            console.log('Fetching products from GraphQL API...');
+        async fetchProductsByCategory({category, sortOrder = 'asc', page = 1}) {
+            console.log('Fetching products from GraphQL API by category...', category);
             const sortQuery = sortOrder === 'desc' ? 'product_sell:desc' : 'product_sell:asc';
+            const start = (this.currentPage - 1) * this.pageSize;
             const mappedCategory = categoryMap[category.toLowerCase()] || category;
+            
             try {
                 const response = await axios.post('http://localhost:1337/graphql', {
                     query: `
-                        query ProductsByCategory($category: String!) {
-                            vsSampleProducts(filters: { product_group: { eq: $category } }, pagination: { limit: 1000 }) {
+                        query ProductsByCategory($category: String!, $start: Int!, $limit: Int!) {
+                            vsSampleProducts(
+                                filters: { product_group: { eq: $category } }, 
+                                sort: "${sortQuery}",
+                                pagination: { start: $start, limit: $limit }
+                            ) {
                                 data {
                                     id
                                     attributes {
@@ -39,15 +45,20 @@ export const useProductsStore = defineStore('products', {
                         }
                     `,
                     variables: {
-                        category: mappedCategory
+                        category: mappedCategory,
+                        start: start,
+                        limit: this.pageSize,
                     }
                 });
                 const data = await response.data;
                 console.log('GraphQL response:', response.data);
                 this.products = data.data.vsSampleProducts.data;
+                this.currentPage = data.data.vsSampleProducts.meta.pagination.page;
+                this.totalProducts = data.data.vsSampleProducts.meta.pagination.total;
                 console.log('Products in store:', this.products);
             } catch (error) {
-                console.error('Error fetching products:', error);
+                console.error('Error fetching products by category:', error);
+                console.error('Response data:', error.response ? error.response.data : 'No response data');
             }
         },
         async fetchAllProducts({ sortOrder = '', page = 1 }) {
